@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -61,14 +60,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 
-
 import androidx.core.app.ActivityCompat;
 
 /**
  * Diagnostic plugin implementation for Android
  */
 public class Diagnostic extends CordovaPlugin{
-
 
     /*************
      * Constants *
@@ -78,7 +75,6 @@ public class Diagnostic extends CordovaPlugin{
      * Tag for debug log messages
      */
     public static final String TAG = "Diagnostic";
-
 
     /**
      * Map of "dangerous" permissions that need to be requested at run-time (Android 6.0/API 23 and above)
@@ -187,11 +183,10 @@ public class Diagnostic extends CordovaPlugin{
         Map<String, Integer> _permissionsMap = new HashMap <String, Integer>();
 
         Diagnostic.addBiDirMapEntry(_permissionsMap, "READ_EXTERNAL_STORAGE", 32);
-        Diagnostic.addBiDirMapEntry(_permissionsMap, "WRITE_EXTERNAL_STORAGE", 29);
+        Diagnostic.addBiDirMapEntry(_permissionsMap, "WRITE_EXTERNAL_STORAGE", 32);
 
         maxSdkPermissionMap = Collections.unmodifiableMap(_permissionsMap);
     }
-
 
     /*
      * Map of permission request code to callback context
@@ -202,7 +197,6 @@ public class Diagnostic extends CordovaPlugin{
      * Map of permission request code to permission statuses
      */
     protected HashMap<String, JSONObject> permissionStatuses = new HashMap<String, JSONObject>();
-
 
     /**
      * User authorised permission
@@ -243,7 +237,6 @@ public class Diagnostic extends CordovaPlugin{
     public static Diagnostic instance = null;
 
     boolean debugEnabled = false;
-
 
     /**
      * Current Cordova callback context (on this thread)
@@ -364,7 +357,6 @@ public class Diagnostic extends CordovaPlugin{
         }
     }
 
-
     public boolean isDataRoamingEnabled() throws Exception {
         return Settings.Global.getInt(this.cordova.getActivity().getContentResolver(), Settings.Global.DATA_ROAMING, 0) == 1;
     }
@@ -376,7 +368,6 @@ public class Diagnostic extends CordovaPlugin{
         appIntent.setData(uri);
         cordova.getActivity().startActivity(appIntent);
     }
-
 
     public void switchToMobileDataSettings() {
         logDebug("Switch to Mobile Data Settings");
@@ -868,7 +859,6 @@ public class Diagnostic extends CordovaPlugin{
             abi = Build.SUPPORTED_ABIS[0];
         }
 
-
         if (abi == "armeabi") {
             arch = CPU_ARCH_ARMv6;
         } else if (abi.equals("armeabi-v7a")) {
@@ -974,7 +964,6 @@ public class Diagnostic extends CordovaPlugin{
         }
         return minVersion;
     }
-
 
     // https://stackoverflow.com/a/55946200/777265
     protected String getNameForApiLevel(int apiLevel) throws Exception{
